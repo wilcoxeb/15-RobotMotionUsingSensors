@@ -64,6 +64,7 @@ def run_test_init():
     #   of the SimpleRoseBot class, then use this function to test __init__.
     # -------------------------------------------------------------------------
 
+    SimpleRoseBot()
 
 def run_test_go_and_stop():
     """ Tests the   go   and   stop   methods of the SimpleRoseBot class. """
@@ -77,6 +78,10 @@ def run_test_go_and_stop():
     #   to test both   go   and   stop   at the same time.
     # -------------------------------------------------------------------------
 
+    robot = SimpleRoseBot()
+    robot.go(100, 70)
+    time.sleep(3)
+    robot.stop()
 
 def run_test_go_straight_for_seconds():
     """ Tests the   go_straight_for_seconds   method of SimpleRoseBot. """
@@ -89,6 +94,9 @@ def run_test_go_straight_for_seconds():
     #   go_straight_for_seconds   method of the SimpleRoseBot class,
     #   then use this function to test that method.
     # -------------------------------------------------------------------------
+
+    robot = SimpleRoseBot()
+    robot.go_straight_for_seconds(10, 100)
 
 
 def run_test_go_straight_for_inches():
@@ -121,6 +129,28 @@ def run_test_go_straight_until_black():
 # Put your   SimpleRoseBot    class here (below this comment).
 # Your instructor may help you get started.
 ###############################################################################
+class SimpleRoseBot(object):
+
+    def __init__(self):
+        self.left_wheel_motor = Motor('B')
+        self.right_wheel_motor = Motor('C')
+        self.color_sensor = ColorSensor(3)
+
+    def go(self, left_wheel_speed, right_wheel_speed):
+        self.left_wheel_motor.turn_on(left_wheel_speed)
+        self.right_wheel_motor.turn_on(right_wheel_speed)
+
+    def stop(self):
+        self.left_wheel_motor.turn_off()
+        self.right_wheel_motor.turn_off()
+
+    def go_straight_for_seconds(self, seconds, speed):
+        self.left_wheel_motor.turn_on(speed)
+        self.right_wheel_motor.turn_on(speed)
+        time.sleep(seconds)
+        self.stop()
+
+    
 
 
 ###############################################################################
